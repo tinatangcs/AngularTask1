@@ -3,9 +3,9 @@
 
 Overview
 
-This is a simple angular project, there are two main files in it.
+     1.This is a simple angular project, there are two main files in it.
 
-index.html and app.js
+     2.index.html and app.js
 
 
 
