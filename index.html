@@ -1,0 +1,244 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- CSS -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" />
+    <style>
+        body     { padding-top:30px; }
+    </style>
+
+    <!-- JS -->
+    <script src="https://code.angularjs.org/1.4.0-rc.1/angular.js"></script>
+    <script src="app.js"></script>
+</head>
+
+<body ng-app="validationApp" ng-controller="mainController">
+<div class="container">
+    <div ng-hide="submitted">
+    <!-- PAGE HEADER -->
+
+    <!-- =================================================================== -->
+    <!-- FORM ============================================================== -->
+    <!-- =================================================================== -->
+
+    <!-- pass in the variable if our form is valid or invalid -->
+    <form class="well form-horizontal"
+          name="userForm" ng-submit="submitForm(userForm.$valid)"
+          novalidate>
+        <fieldset>
+            <!-- Form Name -->
+            <legend>Profile</legend>
+
+        <!-- First Name -->
+        <div class="form-group"
+             ng-class="{ 'has-error' : userForm.fName.$invalid && !userForm.fName.$pristine }">
+            <label class="col-md-4 control-label">First Name*</label>
+            <div class="col-md-4 inputGroupContainer">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i>
+                    </span>
+                    <input type="text" name="fName" class="form-control"
+                           placeholder="First Name"
+                           ng-model="user.fName"
+                           required>
+                </div>
+                <p ng-show="userForm.fName.$invalid && !userForm.fName.$pristine" class="help-block"> First name is required.</p>
+            </div>
+        </div>
+        <!--Last Name -->
+        <div class="form-group" ng-class="{ 'has-error' : userForm.lName.$invalid && !userForm.lName.$pristine }">
+            <label class="col-md-4 control-label">Last Name*</label>
+            <div class="col-md-4 inputGroupContainer">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i>
+                    </span>
+                          <input type="text" name="lName" class="form-control"
+                                 placeholder="Last Name"
+                                 ng-model="user.lName" required>
+                </div>
+                <p ng-show="userForm.lName.$invalid && !userForm.lName.$pristine" class="help-block">Last name is required.</p>
+            </div>
+        </div>
+
+        <!-- Date of birth -->
+        <div class="form-group" ng-class="{ 'has-error' : userForm.daOfBth.$invalid && !userForm.daOfBth.$pristine }">
+            <label class="col-md-4 control-label">Date of birth*</label>
+            <div class="col-md-4 inputGroupContainer">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i>
+                    </span>
+                         <input type="date" name="daOfBth" class="form-control" ng-model="user.daOfBth"
+                                placeholder="yyyy-MM-dd" min="1900-01-01"
+                                required>
+                </div>
+                     <p ng-show="userForm.daOfBth.$invalid && !userForm.daOfBth.$pristine" class="help-block">Enter a valid date.</p>
+            </div>
+        </div>
+
+        <!-- Email -->
+        <div class="form-group" ng-class="{ 'has-error' : userForm.email.$invalid && !userForm.email.$pristine }">
+            <label class="col-md-4 control-label">Email*</label>
+            <div class="col-md-4 inputGroupContainer">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i>
+                    </span>
+                          <input type="email" name="email" class="form-control" ng-model="user.email"
+                                 placeholder="Email Address" required>
+                </div>
+                <p ng-show="userForm.email.$invalid && !userForm.email.$pristine" class="help-block">Enter a valid email.</p>
+            </div>
+        </div>
+        <!-- Address -->
+        <div class="form-group" ng-class="{ 'has-error' : userForm.addLine1.$invalid && !userForm.addLine1.$pristine }">
+            <label class="col-md-4 control-label">Office Address*</label>
+            <div class="col-md-4 inputGroupContainer">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i>
+                    </span>
+                          <input type="text" name="addLine1" class="form-control"
+                                 placeholder="Address"
+                                 ng-model="user.addLine1" required>
+                </div>
+                <p ng-show="userForm.addLine1.$invalid && !userForm.addLine1.$pristine" class="help-block">Address is required.</p>
+            </div>
+        </div>
+
+
+        <!-- City -->
+        <div class="form-group" ng-class="{ 'has-error' : userForm.city.$invalid && !userForm.city.$pristine }">
+            <label class="col-md-4 control-label">City*</label>
+            <div class="col-md-4 inputGroupContainer">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i>
+                    </span>
+                          <input type="text" name="city" class="form-control"
+                                 placeholder="City"
+                                 ng-model="user.city" required>
+                </div>
+                <p ng-show="userForm.city.$invalid && !userForm.city.$pristine" class="help-block">City is required.</p>
+            </div>
+        </div>
+
+        <!-- State -->
+        <div class="form-group" ng-class="{ 'has-error' : userForm.state.$invalid && !userForm.state.$pristine }">
+            <label class="col-md-4 control-label">State*</label>
+            <div class="col-md-4 selectContainer">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+                    <select class="form-control selectpicker" ng-model="user.state" ng-options="o for o in options" required>
+                    <option value="" >Please select your state</option>
+                    </select>
+                </div>
+            <p ng-show="userForm.state.$invalid && !userForm.state.$pristine" class="help-block">State is required.</p>
+            </div>
+        </div>
+
+        <!-- Zip Code -->
+        <div class="form-group" ng-class="{ 'has-error' : userForm.zipCode.$invalid && !userForm.zipCode.$pristine }">
+            <label class="col-md-4 control-label">Zip Code*</label>
+            <div class="col-md-4 inputGroupContainer">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+                    <input type="text" name="zipCode" class="form-control"
+                           placeholder="20002"
+                           ng-model="user.zipCode"
+                           ng-pattern =/^(\d{5}-\d{4}|\d{5})$/
+                           required>
+                </div>
+            <p ng-show="userForm.zipCode.$invalid && !userForm.zipCode.$pristine" class="help-block">Zip code should be 5 digits</p>
+            </div>
+        </div>
+
+        <!-- Phone Number -->
+        <div class = "form-group" ng-class="{ 'has-error' : userForm.phoNum.$invalid && !userForm.phoNum.$pristine }">
+            <label class="col-md-4 control-label">Phone Number*</label>
+            <div class="col-md-4 inputGroupContainer">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+                    <input type="number" name="phoNum" class="form-control" ng-model="user.phoNum"
+                           placeholder="2020008000"
+                           ng-minlength="10" ng-maxlength="10"
+                           required>
+                </div>
+                <p ng-show="userForm.phoNum.$invalid && !userForm.phoNum.$pristine" class="help-block">Phone number should be 10 digits</p>
+            </div>
+        </div>
+
+        <!-- Submit -->
+
+                <label class="col-md-4 control-label"></label>
+                <div class="col-md-4">
+                     <button type="submit" class="btn btn-primary" ng-disabled="userForm.$invalid">Submit
+                          <span class="glyphicon glyphicon-send"></span>
+                     </button>
+                </div>
+
+        </fieldset>
+    </form>
+    </div>
+
+</div>
+
+
+<!-- SHOW DATA FROM INPUTS AS THEY ARE BEING TYPED -->
+    <div ng-hide ="!submitted">
+     <h2>You submitted the following</h2>
+
+    <div class="row">
+        <div class="col-xs-3">fName</div>
+        <div class="col-xs-9">{{ user.fName }}</div>
+    </div>
+    <div class="row">
+        <div class="col-xs-3">lName</div>
+        <div class="col-xs-9  pull-left">{{ user.lName }}</div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-3">Email</div>
+        <div class="col-xs-9  pull-left">{{ user.email }}</div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-3">Date of Birth</div>
+        <div class="col-xs-9  pull-left">{{ user.daOfBth | date: "yyyy-MM-dd"}}</div>
+    </div>
+    <div class="row">
+        <div class="col-xs-3">Address</div>
+        <div class="col-xs-9  pull-left">{{ user.addLine1 }}</div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-3">Zip code</div>
+        <div class="col-xs-9  pull-left">{{ user.zipCode }}</div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-3">City</div>
+        <div class="col-xs-9  pull-left">{{ user.city }}</div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-3">State</div>
+        <div class="col-xs-9  pull-left">{{ user.state }}</div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-3">Phone Number</div>
+        <div class="col-xs-9  pull-left">{{ user.phoNum }}</div>
+    </div>
+
+    <br>
+    <button class="btn btn-primary" ng-click="newUser()">New</button>
+
+</div>
+
+
+</div>
+
+
+</body>
+</html>
