@@ -6,3 +6,6 @@ How to use it
 
 2.  You will see it as follows.
 
+![image](https://github.com/tinatangcs/AngularTask1/master/screenshots/homepage.png)  
+
+
